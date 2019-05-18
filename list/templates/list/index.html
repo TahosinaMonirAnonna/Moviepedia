@@ -1,0 +1,36 @@
+{% extends 'list/base.html' %}
+{% block body %}
+<form class="form-inline"  action="create" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="title" class="form-control" style="width:23%;" required="required"/>
+        <label for="director">Director</label>
+        <input type="text" name="director" class="form-control" style="width:23%;" required="required"/>
+        <label for="genre">Genre</label>
+        <input type="text" name="genre" class="form-control" style="width:23%;" required="required"/>
+        <button type="submit" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-plus"></span> ADD</button>
+    </div>
+</form>
+<br />
+<table class="table table-bordered">
+    <thead class="alert-warning">
+        <tr>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Genre</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for movie in movies %}
+        <tr>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.director }}</td>
+            <td>{{ movie.genre }}</td>
+            <td><center><a class="btn btn-sm btn-warning" href="edit/{{ movie.id }}"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a class="btn btn-sm btn-danger" href="delete/{{ movie.id }}"><span class="glyphicon glyphicon-trash"></span> Delete</a></center></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
